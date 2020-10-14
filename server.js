@@ -36,8 +36,8 @@ app.get('/location', handleLocation);
 function Location (city, geoData) {
     this.search_query = city;
     this.formatted_query = geoData[0].display_name;
-    this.latitude = geoData [0];
-    this.longitude = geoData [0];
+    this.latitude = geoData [0].lat;
+    this.longitude = geoData [0].lon;
 }
 
 function handleLocation(request, response) {
@@ -45,6 +45,7 @@ try{
 // try to resolve the following with no errors
 const geoData = require('./data/location.json');
 const city = request.query.city;
+console.log
 const locationData = new Location(city, geoData);
 response.json(locationData);
 } catch {
