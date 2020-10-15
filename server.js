@@ -8,6 +8,14 @@ const cors = require('cors');
 const app = express ();
 app.use(cors());
 
+const locations = {};
+
+app.get('/location', locationHandler);
+app.get('/restaurants', restaurantHandler);
+app.get('/places', placesHandler);
+app.use('*', notFoundHandler);
+
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (request, response) => {
