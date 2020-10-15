@@ -41,7 +41,7 @@ function Location (city, geoData) {
 function handleLocation(request, response) {
     try {
 // try to resolve the following with no errors
-    //const geoData = require('./data/location.json');
+    //const geoData = require('./data/location.json'); error here
     const city = request.query.city;
     let key = process.env.GEOCODE_API_KEY
         let url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${city}&format=json`
@@ -55,7 +55,7 @@ function handleLocation(request, response) {
         })
 //     console.log
 //     const locationData = new Location(city, geoData); //geoData in location.json
-// response.json(locationData); //js object sent to client-- 
+// response.json(locationData); //js object sent to client--  error here
 } catch {
     //otherwise, if an error occurs
     // handle error here
