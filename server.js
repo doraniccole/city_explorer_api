@@ -1,12 +1,12 @@
 'use strict'
 //pull in any environment variables (process.env) that live in a .env file
 require('dotenv').config();
-const express = require('express');
-const superagent = require('superagent');
+const express = require('express'); //to use express package in app
+const superagent = require('superagent'); //to use superagent in app in association with Node
 const cors = require('cors');
 //assign express to "app"
-const app = express ();
-app.use(cors());
+const app = express (); //creates express server and naming it app
+app.use(cors()); //creating new cors service-- app will use cors service 
 
 const locations = {};
 
@@ -65,13 +65,13 @@ function Location (city, geoData) {
 }
 
 function handleLocation(request, response) {
-try{
+try {
 // try to resolve the following with no errors
 const geoData = require('./data/location.json');
 const city = request.query.city;
 console.log
-const locationData = new Location(city, geoData);
-response.json(locationData);
+const locationData = new Location(city, geoData); //geoData in location.json
+response.json(locationData); //js object sent to client-- 
 } catch {
     //otherwise, if an error occurs
     // handle error here
