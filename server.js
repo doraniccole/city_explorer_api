@@ -76,27 +76,28 @@ app.listen(PORT, () => {
 //app.get('/location', handleLocation);
 //location functions from lecture
 
-// app.get('weather', (request, response) => {
-//     //go get the weather from somewhere
+app.get('weather', (request, response) => {
+//     //go get the weather
 //     //build and aggregate/approval set of data to send to the user
 //     //send the weather data that approve back to the client
 //     //res.json({weatherDataFromAPIorDB})
-// });
-// function handleWeather(request, response) {
-//     // declare a variable named weather data held in local json file 
-//     let weatherData = require('./data/weather.json');
-//     // declaring a new array called days
-//     const days = [];
-//     // for each day in weatherData, we will create a new Object
-//     weatherData.data.forEach(day => days.push(new Day(day)));
-//     response.send(days);
-// }
+ });
 
-// function Day(dayData) {
-//     this.forecast = dayData.weather.description;
-//     this.time = dayData.datetime;
-// }
-// //weather function Mark and Kim
+function Day(dayData) {
+    this.forecast = dayData.weather.description;
+    this.time = dayData.dateTime;
+}
+ //weather function Mark and Kim
+function handleWeather(request, response) {
+//     // declare a variable named weather data held in local json file 
+     let weatherData = require('./data/weather.json');
+//     // declaring a new array called days
+     const days = [];
+//     // for each day in weatherData, we will create a new Object
+     weatherData.data.forEach(day => days.push(new Day(day)));
+     response.send(days);
+ }
+
 
 // // callback
 // superagent

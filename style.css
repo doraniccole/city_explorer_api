@@ -1,0 +1,12 @@
+#site-title {
+    color: #b4239c; font-size: 80px; font: bolder; text-align: center; border: 10px; padding: 10px;
+
+}
+body {
+    background-color: #ebd5b5; height: auto; font-family: 'Cinzel Medium';font-size: 20px; margin: 35px; padding: 10%;
+
+}
+
+header {
+    height: fit-content; 
+}
