@@ -100,24 +100,24 @@ function handleWeather(request, response) {
 
 
 // // callback
-// superagent
-//     .post('https://www.weatherbit.io/account/dashboard')
-//     .send({ weather: '', storms: '' }) // sends a JSON post body
-//     .set('https://www.weatherbit.io/account/dashboard', '79b23f2d2f38464fb88f1a20231b5c78')
-//     .set('accept', 'json')
-//     .end((err, res) => {
-//         // Calling the end function will send the request
-//     });
+//   superagent
+//       .post('https://www.weatherbit.io/account/dashboard')
+//       .send({ weather: '', storms: '' }) // sends a JSON post body
+//       .set('https://www.weatherbit.io/account/dashboard', '79b23f2d2f38464fb88f1a20231b5c78')
+//       .set('accept', 'json')
+//       .end((err, res) => {
+// //          // Calling the end function will send the request
+//      });
 
-// // promise with then/catch
-// superagent.post('').then(console.log).catch(console.error);
+//  // promise with then/catch
+//  superagent.post('').then(console.log).catch(console.error);
 
-// // promise with async/await
-// (async () => {
-//     try {
-//         const res = await superagent.post('');
-//         console.log(res);
-//     } catch (err) {
-//         console.error(err);
-//     }
-// })(); //
+//  // promise with async/await
+//  (async () => {
+//      try {
+//          const res = await superagent.post(''); // await: waits until promise resolves
+//          console.log(res);   // print res to the console
+//      } catch (err) {
+//          console.error(err); // print errors if any occur
+//      }
+//  })(); 
