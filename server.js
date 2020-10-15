@@ -2,7 +2,7 @@
 //pull in any environment variables (process.env) that live in a .env file
 require('dotenv').config();
 const express = require('express');
-//pull in express and assign the whole app to express
+const superagent = require('superagent');
 const cors = require('cors');
 //assign express to "app"
 const app = express ();
@@ -34,18 +34,40 @@ app.get('/test/route', (request, response) => {
 
 app.get('weather', (request, response) => {
     //go get the weather from somewhere
-    //build and aggregate/approval ser of data to send to the user
-    //send the weather data that apporve back to the client
-    //res.json({westherDataFromAPIorDB})
+    //build and aggregate/approval set of data to send to the user
+    //send the weather data that approve back to the client
+    //res.json({weatherDataFromAPIorDB})
 });
+
+function Weather() {
+    this.search_query = city;
+    this.formatted_query = geoData[0].display_name;
+    this.latitude = geoData[0].lat;
+    this.longitude = geoData[0].lon;
+}
+
+function handleWeather(request, response) {
+    try {
+        // try to resolve the following with no errors
+        const geoData = require('weather.json');
+        const city = request.query.city;
+        console.log
+        const locationData = new Weather(city, geoData);
+        response.json(locationData);
+    } catch {
+        //otherwise, if an error occurs
+        // handle error here
+        response.status(500).send('sorry, something broke.');
+    }
+}
 //http://locationhost:3000/location?city=slc&county=sl
 app.get('/location', handleLocation);
 
 function Location (city, geoData) {
     this.search_query = city;
     this.formatted_query = geoData[0].display_name;
-    this.latitude = geoData [0];
-    this.longitude = geoData [0];
+    this.latitude = geoData [0].lat;
+    this.longitude = geoData [0].lon;
 }
 
 function handleLocation(request, response) {
@@ -53,6 +75,7 @@ try{
 // try to resolve the following with no errors
 const geoData = require('./data/location.json');
 const city = request.query.city;
+console.log
 const locationData = new Location(city, geoData);
 response.json(locationData);
 } catch {
@@ -71,4 +94,27 @@ app.listen(PORT, () => {
 
 });
 
+const superagent = require('superagent');
 
+// callback
+superagent
+    .post('https://www.weatherbit.io/account/dashboard')
+    .send({ weather: '', storms: '' }) // sends a JSON post body
+    .set('https://www.weatherbit.io/account/dashboard', '79b23f2d2f38464fb88f1a20231b5c78')
+    .set('accept', 'json')
+    .end((err, res) => {
+        // Calling the end function will send the request
+    });
+
+// promise with then/catch
+superagent.post('').then(console.log).catch(console.error);
+
+// promise with async/await
+(async () => {
+    try {
+        const res = await superagent.post('');
+        console.log(res);
+    } catch (err) {
+        console.error(err);
+    }
+})();
