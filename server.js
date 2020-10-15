@@ -5,15 +5,15 @@ const express = require('express'); //to use express package in app
 const superagent = require('superagent'); //to use superagent in app in association with Node
 const cors = require('cors');
 //assign express to "app"
-const app = express (); //creates express server and naming it app
+const app = express(); //creates express server and naming it app
 app.use(cors()); //creating new cors service-- app will use cors service 
 
 const locations = {};
 
-app.get('/location', locationHandler); //express (app) retrieves url, location function
-app.get('/restaurants', restaurantHandler); 
-app.get('/places', placesHandler);
-app.use('*', notFoundHandler);
+app.get('/location', handleLocation); //express (app) retrieves url, location function
+// app.get('/restaurants', restaurantHandler); 
+// app.get('/places', placesHandler);
+//app.use('*', notFoundHandler);
 
 
 const PORT = process.env.PORT || 3000;
@@ -33,19 +33,29 @@ app.get('/test/route', (request, response) => {
 });
 function Location (city, geoData) {
     this.search_query = city;
-    this.formatted_query = geoData[0].display_name;
-    this.latitude = geoData [0].lat;
-    this.longitude = geoData [0].lon;
+    this.formatted_query = geoData.display_name;
+    this.latitude = geoData.lat;
+    this.longitude = geoData.lon;
 }
 
 function handleLocation(request, response) {
-try {
+    try {
 // try to resolve the following with no errors
-const geoData = require('./data/location.json');
-const city = request.query.city;
-console.log
-const locationData = new Location(city, geoData); //geoData in location.json
-response.json(locationData); //js object sent to client-- 
+    //const geoData = require('./data/location.json');
+    const city = request.query.city;
+    let key = process.env.GEOCODE_API_KEY
+        let url = `https://us1.locationiq.com/v1/search.php?key=${key}&q=${city}&format=json`
+        superagent.get(url)
+        .then (data => {
+            const locationResults = data.body[0]
+            console.log(locationResults)
+            const location = new Location(city, locationResults)
+            console.log (location)
+            response.status(200).send(location)
+        })
+//     console.log
+//     const locationData = new Location(city, geoData); //geoData in location.json
+// response.json(locationData); //js object sent to client-- 
 } catch {
     //otherwise, if an error occurs
     // handle error here
@@ -63,7 +73,7 @@ app.listen(PORT, () => {
 });
 
 //http://locationhost:3000/location?city=slc&county=sl
-app.get('/location', handleLocation);
+//app.get('/location', handleLocation);
 //location functions from lecture
 
 // app.get('weather', (request, response) => {
