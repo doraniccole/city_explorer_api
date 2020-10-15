@@ -90,7 +90,8 @@ function Day(dayData) {
  //weather function Mark and Kim
 function handleWeather(request, response) {
 //     // declare a variable named weather data held in local json file 
-     let weatherData = require('./data/weather.json');
+     let weatherData = require('../data/weather.json');
+     console.log('here comes the sun ' + weatherData)
 //     // declaring a new array called days
      const days = [];
 //     // for each day in weatherData, we will create a new Object
@@ -100,24 +101,24 @@ function handleWeather(request, response) {
 
 
 // // callback
-//   superagent
-//       .post('https://www.weatherbit.io/account/dashboard')
-//       .send({ weather: '', storms: '' }) // sends a JSON post body
-//       .set('https://www.weatherbit.io/account/dashboard', '79b23f2d2f38464fb88f1a20231b5c78')
-//       .set('accept', 'json')
-//       .end((err, res) => {
-// //          // Calling the end function will send the request
-//      });
+  superagent
+      .post('https://api.weatherbit.io/v2.0/current')
+      .send({ weather: '', storms: '' }) // sends a JSON post body
+      .set('key', '3ca74d71fc084f829406f2c20e9b0333')
+      .set('accept', 'json')
+      .end((err, res) => {
+//          // Calling the end function will send the request
+     });
 
-//  // promise with then/catch
-//  superagent.post('').then(console.log).catch(console.error);
+ // promise with then/catch
+ superagent.post('').then(console.log).catch(console.error);
 
-//  // promise with async/await
-//  (async () => {
-//      try {
-//          const res = await superagent.post(''); // await: waits until promise resolves
-//          console.log(res);   // print res to the console
-//      } catch (err) {
-//          console.error(err); // print errors if any occur
-//      }
-//  })(); 
+ // promise with async/await
+ (async () => {
+     try {
+         const res = await superagent.post(''); // await: waits until promise resolves
+         console.log(res);   // print res to the console
+     } catch (err) {
+         console.error(err); // print errors if any occur
+     }
+ })(); 
