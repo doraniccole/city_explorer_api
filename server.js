@@ -38,28 +38,22 @@ app.get('weather', (request, response) => {
     //send the weather data that approve back to the client
     //res.json({weatherDataFromAPIorDB})
 });
-
-function Weather() {
-    this.search_query = city;
-    this.formatted_query = geoData[0].display_name;
-    this.latitude = geoData[0].lat;
-    this.longitude = geoData[0].lon;
-}
-
 function handleWeather(request, response) {
-    try {
-        // try to resolve the following with no errors
-        const geoData = require('weather.json');
-        const city = request.query.city;
-        console.log
-        const locationData = new Weather(city, geoData);
-        response.json(locationData);
-    } catch {
-        //otherwise, if an error occurs
-        // handle error here
-        response.status(500).send('sorry, something broke.');
-    }
+    // declare a variable named weather data that has its contents as the entire json file 
+    let weatherData = require('./data/weather.json');
+    // declaring a new array called days
+    const days = [];
+    // for each day in weatherData, we will create a new Object
+    weatherData.data.forEach(day => days.push(new Day(day)));
+    response.send(days);
 }
+
+function Day(dayData) {
+    this.forecast = dayData.weather.description;
+    this.time = dayData.datetime;
+}
+//weather function Mark and Kim
+
 //http://locationhost:3000/location?city=slc&county=sl
 app.get('/location', handleLocation);
 

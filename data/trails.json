@@ -1,0 +1,14 @@
+[
+    {
+        "id": 7,
+        "parkId": 2,
+        "name": "Columbia Plateau Trail - Cheney Trailhead",
+        "location": "https://goo.gl/maps/gHGcWQDBqzR2",
+        "difficulty": 1,
+        "length": "10",
+        "elevationChange": 416,
+        "routeType": "Point-to-Point",
+        "reviews": "http://localhost/benbrougher-tech/hiker/v1/reviews/?trailId=7",
+        "park": "http://localhost/benbrougher-tech/hiker/v1/parks/?id=2"
+    }
+]
